@@ -1,0 +1,17 @@
+html, body {
+	background:url('../img/bg.jpg') center center no-repeat;
+	height: 100%;
+	background-size: cover;
+}
+
+#logo img{
+	margin:0 auto !important;
+	padding-top:20px;
+}
+
+#intro p, h1{
+	color: black;
+	text-align: center;
+	font-family: 'PT Serif', serif;
+	font-size: 1.8em;
+}
