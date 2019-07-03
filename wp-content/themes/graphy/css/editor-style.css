@@ -1,0 +1,34 @@
+.editor-post-title__block .editor-post-title__input {color: #111;font-size: 40px;font-weight: 400;letter-spacing: -.01em;line-height: 1.2;}
+.editor-post-title__block .editor-post-title__input:lang(ja) {font-size: 32px;}
+body {color: #333;font-size: 17px;line-height: 1.6;}
+body:lang(ja) {font-size: 16px;line-height: 1.7;}
+h1, h2, h3, h4, h5, h6 {clear: both;color: #111;font-weight: 400;letter-spacing: -.01em;line-height: 1.4;}
+h1 {font-size: 2.5rem;margin-bottom: 1em;margin-top: 2em;}
+h2 {font-size: 1.75rem;margin-bottom: 1em;margin-top: 2em;}
+h3 {font-size: 1.5rem;margin-bottom: 1em;margin-top: 1.5em;}
+h4 {font-size: 1.25rem;margin-bottom: 1em;margin-top: 1.5em;}
+h5 {font-size: 1.125rem;margin-bottom: .5em;margin-top: 1em;}
+h6 {font-size: 1.063rem;margin-bottom: .5em;margin-top: 1em;}
+a, .wp-block-button__link {color: #a62425;text-decoration: underline;}
+p {margin: 0 0 1.6em;font-size: 100%;}
+b, strong {font-weight: 700;}
+dfn, q, cite, em, i {font-style: italic !important;}
+q {quotes: "" "";}
+cite {border-bottom: dotted 1px #999;}
+code, kbd, tt, var {border-bottom: solid 1px #ccc;color: #555;font-family: Consolas,"Courier New",monospace;font-size: 87.5%;}
+abbr, acronym {border-bottom: 1px dotted #999;cursor: help;}
+mark, ins {background-color: #fffad3;text-decoration: none;}
+table {border-collapse: collapse;border-spacing: 0;border-top: solid 1px #e6e6e6;font-size: 93.8%;margin: 0 0 1.6em;width: 100%;}
+caption {margin-bottom: .6em;}
+table th, table td {border-bottom: solid 1px #e6e6e6;padding: .8em 1.2em .8em 0;}
+th {font-weight: 600;text-align: left;}
+blockquote {border: none !important;color: #666;font-style: italic;margin: 0 0 2em;padding: 12px 0 0 44px !important;position: relative;}
+blockquote:before {color: #ccc;content: "“";font-family: Georgia,serif;font-size: 84px;left: -5px;line-height: 1;position: absolute;top: -5px;}
+.wp-block-quote__citation, .wp-block-pullquote__citation {font-size: 90%;text-transform: none;}
+.wp-block-pullquote {border: none;padding: 12px 0;}
+address {margin: 0 0 1.6em;}
+pre {background-color: #eee;color: #555;font-family: Consolas,"Courier New",monospace;font-size: 87.5%;line-height: 1.4;margin: 0 0 1.7em;max-width: 100%;overflow: auto;padding: 1.4em;word-wrap: normal;}
+.wp-block {max-width: 730px;}
+.wp-block[data-align="wide"] {max-width: 830px;}
+.wp-block[data-align="full"] {max-width: none;}
+html .mceContentBody {max-width: 700px;}
