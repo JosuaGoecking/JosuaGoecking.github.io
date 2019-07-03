@@ -1,0 +1,8 @@
+.graphy-upgrade-link {background-color: #e7430e;border-radius: 4px;color: #fff !important;display: inline-block;font-size: 12px;line-height: 1.5;margin-top: 10px;text-decoration: none;text-transform: uppercase;padding: 3px 10px 4px;}
+.graphy-upgrade-link:hover, .graphy-upgrade-link:active {background-color: #ea6236;}
+#accordion-section-graphy_fonts .accordion-section-title, #accordion-section-graphy_title .accordion-section-title, #accordion-section-graphy_featured .accordion-section-title, #accordion-section-graphy_post .accordion-section-title, #accordion-section-graphy_category_colors .accordion-section-title, #accordion-section-graphy_footer .accordion-section-title, #accordion-section-graphy_custom_css .accordion-section-title {background: url("../images/customizer-bg.png") repeat;}
+#accordion-section-graphy_fonts .accordion-section-title:after, #accordion-section-graphy_title .accordion-section-title:after, #accordion-section-graphy_featured .accordion-section-title:after, #accordion-section-graphy_post .accordion-section-title:after, #accordion-section-graphy_category_colors .accordion-section-title:after, #accordion-section-graphy_footer .accordion-section-title:after, #accordion-section-graphy_custom_css .accordion-section-title:after {content: "";}
+.graphy-read-me h3 {margin-top: 2.2em;}
+.graphy-read-me-text {margin-bottom: .5em;}
+.graphy-read-me-link {margin-top: .5em;}
+#customize-control-jetpack_relatedposts-show_headline, #customize-control-jetpack_relatedposts-headline, #customize-control-jetpack_relatedposts-show_context {display: none !important;}
