@@ -254,16 +254,16 @@ tbody tr:hover {
     top: 0;
   }
   table tbody tr td:nth-child(1):before {
-    content: "Date";
+    content: "Titel";
   }
   table tbody tr td:nth-child(2):before {
-    content: "Order ID";
+    content: "Beschreibung";
   }
   table tbody tr td:nth-child(3):before {
-    content: "Name";
+    content: "Links";
   }
   table tbody tr td:nth-child(4):before {
-    content: "Price";
+    content: "Priorität";
   }
   table tbody tr td:nth-child(5):before {
     content: "Quantity";
