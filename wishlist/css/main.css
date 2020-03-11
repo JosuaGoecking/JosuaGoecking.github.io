@@ -257,13 +257,13 @@ tbody tr:hover {
     content: "Titel";
   }
   table tbody tr td:nth-child(2):before {
-    content: "Beschreibung";
+    content: "Desc.";
   }
   table tbody tr td:nth-child(3):before {
     content: "Links";
   }
   table tbody tr td:nth-child(4):before {
-    content: "Priorität";
+    content: "Prio.";
   }
   table tbody tr td:nth-child(5):before {
     content: "Quantity";
