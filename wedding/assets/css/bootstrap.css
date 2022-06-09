@@ -4,6 +4,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+#JohannesIstSuper,#Allezeit\!{
+  font-size: clamp(16px, 4vw, 22px);
+  margin: 5pt;
+  padding: clamp(15px, 4vw, 35pt);
+}
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
