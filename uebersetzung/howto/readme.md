@@ -8,7 +8,7 @@ können sie hier hochgeladen und über einen Browser auf Handy oder PC angezeigt
 
 ## Excel Datei
 
-Die Excel Datei muss dabei die folgende Form bleiben: In Spalte A die Bezeichnung der Schriftstelle eintragen (z.B. Joh 3:16). In Spalte B wird dann der Vers in Englisch eingetragen (also z.B. "16 For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.").
+Die Excel Datei muss dabei die folgende Form haben: In `Spalte A` die Bezeichnung der Schriftstelle eintragen (z.B. Joh 3:16). In `Spalte B` wird dann der Vers in Englisch eingetragen (also z.B. "16 For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.").
 Auch längere Versabschnitte können problemlos in eine Zelle kopiert werden.
 
 Das kann dann in etwa so aussehen:
