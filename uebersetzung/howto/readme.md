@@ -1,4 +1,4 @@
-# Bibelstellen
+# Bibelstellenübersicht fürs Übersetzen
 
 Die Bibelstellen lassen sich so anzeigen, dass man auf die jeweilige Stelle klicken muss und diese dann angezeigt wird.
 Das wird mit mehreren verlinkten HTML Dateien erreicht (dieselben Dateien, die Webseiten im Internet darstellen).
