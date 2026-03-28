@@ -1,0 +1,41 @@
+/* ─── Shared Design Tokens ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap');
+
+:root {
+  --bg:           #0a0a0f;
+  --bg-card:      #111118;
+  --border:       #2a2a3a;
+  --border-light: #3d3d55;
+  --gold:         #c9a84c;
+  --gold-dim:     #8a6f2e;
+  --gold-glow:    rgba(201,168,76,.15);
+  --text:         #e8e0d0;
+  --text-muted:   #7a7a8a;
+  --accent:       #8b3a3a;
+  --accent-hover: #b04a4a;
+
+  --font-display: 'Cinzel', serif;
+  --font-body:    'EB Garamond', serif;
+  --font-fine:    'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  /* subtle cross-hatch grain */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,.06) 0%, transparent 60%);
+}
