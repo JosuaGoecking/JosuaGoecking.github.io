@@ -1,59 +1,189 @@
-@import url(https://fonts.googleapis.com/css?family=EB+Garamond|Droid+Serif|Playfair+Display|Open+Sans+Condensed:300);
+/* ─── Verse Page ────────────────────────────────────────────────────────────── */
+@import url('style_shared.css');
 
-*, *:after, *:before {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
 }
 
-html, body {
-    font-family: 'EB Garamond';
-    font-size: 32px;
-    line-height: 1.4rem;
-    height: 100%;
-    padding: .5rem;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: auto;
-     -webkit-font-smoothing: antialiased;
-             font-smoothing: antialiased;
-    font-kerning: normal;
-    background-color: black;
-    color: white;
+/* ── Back link ── */
+.back-link {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.75rem;
+  font-family: var(--font-display);
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem 1rem .55rem .8rem;
+  border: 1px solid var(--gold-dim);
+  background: rgba(201,168,76,.07);
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+  z-index: 10;
+}
+.back-link::before {
+  content: '←';
+  font-size: 1rem;
+  letter-spacing: 0;
+  transition: transform .2s ease;
+}
+.back-link:hover {
+  color: #fff;
+  border-color: var(--gold);
+  background: rgba(201,168,76,.18);
+}
+.back-link:hover::before {
+  transform: translateX(-4px);
 }
 
-p {
-    line-height: 1.4em;
+/* ── Verse card ── */
+.verse-card {
+  max-width: 640px;
+  width: 100%;
+  padding: 3.5rem 3rem 2.5rem;
+  border: 1px solid var(--border);
+  position: relative;
+  background: var(--bg-card);
+
+  /* gold corner accents */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-color: var(--gold-dim);
+    border-style: solid;
+    opacity: .6;
+  }
+  &::before {
+    top: -.5px; left: -.5px;
+    border-width: 1px 0 0 1px;
+  }
+  &::after {
+    bottom: -.5px; right: -.5px;
+    border-width: 0 1px 1px 0;
+  }
 }
 
-.quote {
-    position: relative;
-    letter-spacing: .03em;
-    margin-bottom: .5rem;
-    
-    &:before {
-        position: absolute;
-        left: -.7em;
-    }
-    
-    &:after {
-        margin-right: -1rem;
-    }
+/* extra corners via wrapper pseudo */
+.verse-card__corners::before,
+.verse-card__corners::after {
+  content: '';
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-color: var(--gold-dim);
+  border-style: solid;
+  opacity: .6;
+  pointer-events: none;
+}
+.verse-card__corners::before {
+  top: -.5px; right: -.5px;
+  border-width: 1px 1px 0 0;
+}
+.verse-card__corners::after {
+  bottom: -.5px; left: -.5px;
+  border-width: 0 0 1px 1px;
 }
 
-.quote--container {
-    margin: 4.5rem auto 0;
-    width: 17em;
-    border-bottom: 2px dotted #C6D1BF;
-    padding-bottom: .5rem;
+/* ornamental top rule */
+.verse-card__rule {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 2.25rem;
+  color: var(--border-light);
+}
+.verse-card__rule::before,
+.verse-card__rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-light), transparent);
+}
+.verse-card__rule-symbol {
+  color: var(--gold-dim);
+  font-size: .9rem;
+  opacity: .7;
 }
 
-.quote--highlight {
-    color: #D24335;
+/* opening quotation mark */
+.verse-card__quote-mark {
+  font-family: var(--font-fine);
+  font-size: 5rem;
+  line-height: .6;
+  color: var(--gold-dim);
+  opacity: .35;
+  margin-bottom: .5rem;
+  display: block;
+  user-select: none;
 }
 
-.quote--author {
-    font-family: 'Open Sans Condensed';
-    font-size: .8rem;
-    text-align: right;
-    font-weight: 300;
+/* verse text */
+.verse-card__text {
+  font-family: var(--font-fine);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  line-height: 1.7;
+  color: var(--text);
+  letter-spacing: .01em;
+  margin-bottom: 2rem;
+}
+
+/* highlighted words – optional, mark with <em> */
+.verse-card__text em {
+  font-style: italic;
+  color: #c9a84c;
+  font-weight: 400;
+}
+
+/* bottom divider + author */
+.verse-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.verse-card__footer-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.verse-card__reference {
+  font-family: var(--font-display);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ── Entry animation ── */
+@keyframes revealCard {
+  from { opacity: 0; transform: translateY(20px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.verse-card {
+  animation: revealCard .55s cubic-bezier(.22,.68,0,1.1) both;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .verse-card {
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  .back-link {
+    position: static;
+    margin-bottom: 1.5rem;
+    align-self: flex-start;
+  }
 }
