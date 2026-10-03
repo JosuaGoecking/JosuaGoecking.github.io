@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03.10.2026 10:30 – Bibelstellen</title>
+  <link rel="stylesheet" href="../style_shared.css">
+  <link rel="stylesheet" href="../style_index.css">
+  <link rel="stylesheet" href="../style_verse.css">
+  <style>
+    /* ── Suchleiste ── */
+    .search-bar {
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+    .search-bar__input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      letter-spacing: .02em;
+      padding: .85rem 1rem .85rem 2.5rem;
+      outline: none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .search-bar__input::placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .search-bar__input:focus {
+      border-color: var(--gold-dim);
+      background: #161622;
+    }
+    .search-bar__icon {
+      position: absolute;
+      left: 1.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-dim);
+      font-size: .95rem;
+      pointer-events: none;
+    }
+    .search-bar__count {
+      text-align: center;
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: .85rem;
+      color: var(--text-muted);
+      margin-top: .6rem;
+    }
+
+    /* ── Verweise: verstecken statt neu laden ── */
+    .scripture-card[hidden] { display: none; }
+
+    /* ── Verse-Sektion (statt eigener Seite) ── */
+    .verses-section {
+      max-width: 640px;
+      margin: 2rem auto 0;
+      padding: 0 1.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      scroll-margin-top: 2rem;
+    }
+    .verses-section .verse-card {
+      scroll-margin-top: 2rem;
+      animation: none; /* nicht bei jedem Laden neu einblenden */
+    }
+    .verse-card__gotop {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.25rem;
+      font-family: var(--font-display);
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .verse-card__gotop:hover { color: var(--gold); }
+
+    /* Zielanker kurz hervorheben */
+    .verse-card:target {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back-link" href="#top">Übersicht</a>
+
+  <header class="page-header" id="top">
+    <h1 class="page-header__title">Bibelstellen</h1>
+    <p class="page-header__date">03.10.2026 10:30</p>
+  </header>
+
+  <div class="divider" aria-hidden="true">
+    <span class="divider__symbol">✦</span>
+  </div>
+
+  <div class="search-bar">
+    <span class="search-bar__icon" aria-hidden="true">✦</span>
+    <input
+      type="search"
+      id="scriptureSearch"
+      class="search-bar__input"
+      placeholder="Bibelstelle oder Vers suchen …"
+      autocomplete="off"
+    >
+    <p class="search-bar__count" id="searchCount"></p>
+  </div>
+
+  <main>
+    <ul class="scripture-grid" role="list" id="scriptureGrid">
+      
+      <li class="scripture-card" data-search="joh 14,8 philip said, ‘lord, show us the father and that will be enough for us.’">
+        <a href="#verse-1">Joh 14,8</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 17,26 i have made you [5] known to them, and will continue to make you known in order that the love you have for me may be in them and that i myself may be in them.’">
+        <a href="#verse-2">Joh 17,26</a>
+      </li>
+      
+      <li class="scripture-card" data-search="mt 12,28 but if it is by the spirit of god that i drive out demons, then the kingdom of god has come upon you.">
+        <a href="#verse-3">Mt 12,28</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1.joh 4,6.9 6 we are from god, and whoever knows god listens to us; but whoever is not from god does not listen to us. this is how we recognise the spirit[1] of truth and the spirit of falsehood. 9 this is how god showed his love among us: he sent his one and only son into the world that we might live through him.">
+        <a href="#verse-4">1.Joh 4,6.9</a>
+      </li>
+      
+      <li class="scripture-card" data-search="eph 3,17-19 so that christ may dwell in your hearts through faith. and i pray that you, being rooted and established in love, may have power, together with all the lord’s holy people, to grasp how wide and long and high and deep is the love of christ, and to know this love that surpasses knowledge – that you may be filled to the measure of all the fullness of god.">
+        <a href="#verse-5">Eph 3,17-19</a>
+      </li>
+      
+      <li class="scripture-card" data-search="kol 2,9 for in christ all the fullness of the deity lives in bodily form,">
+        <a href="#verse-6">Kol 2,9</a>
+      </li>
+      
+      <li class="scripture-card" data-search="apg 17,25 and he is not served by human hands, as if he needed anything. rather, he himself gives everyone life and breath and everything else.">
+        <a href="#verse-7">Apg 17,25</a>
+      </li>
+      
+      <li class="scripture-card" data-search="ps 23,1 the lord is my shepherd, i lack nothing.">
+        <a href="#verse-8">Ps 23,1</a>
+      </li>
+      
+      <li class="scripture-card" data-search="2.mose 4,22 then say to pharaoh, “this is what the lord says: israel is my firstborn son,">
+        <a href="#verse-9">2.Mose 4,22</a>
+      </li>
+      
+      <li class="scripture-card" data-search="5.mose 32,6 is this the way you repay the lord, you foolish and unwise people? is he not your father, your creator, [1] who made you and formed you?">
+        <a href="#verse-10">5.Mose 32,6</a>
+      </li>
+      
+      <li class="scripture-card" data-search="jes 63,16 but you are our father, though abraham does not know us or israel acknowledge us; you, lord, are our father, our redeemer from of old is your name.">
+        <a href="#verse-11">Jes 63,16</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 17,6 ‘i have revealed you [1] to those whom you gave me out of the world. they were yours; you gave them to me and they have obeyed your word.">
+        <a href="#verse-12">Joh 17,6</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1.mose 1,27 so god created mankind in his own image, in the image of god he created them; male and female he created them.">
+        <a href="#verse-13">1.Mose 1,27</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 16,9 about sin, because people do not believe in me;">
+        <a href="#verse-14">Joh 16,9</a>
+      </li>
+      
+      <li class="scripture-card" data-search="hos 11,1-4 ‘when israel was a child, i loved him, and out of egypt i called my son. but the more they were called, the more they went away from me. [1] they sacrificed to the baals and they burned incense to images. it was i who taught ephraim to walk, taking them by the arms; but they did not realise it was i who healed them. i led them with cords of human kindness, with ties of love. to them i was like one who lifts a little child to the cheek, and i bent down to feed them.">
+        <a href="#verse-15">Hos 11,1-4</a>
+      </li>
+      
+      <li class="scripture-card" data-search="mk 1,11 and a voice came from heaven: ‘you are my son, whom i love; with you i am well pleased.’">
+        <a href="#verse-16">Mk 1,11</a>
+      </li>
+      
+      <li class="scripture-card" data-search="jes 43,1b-2 1 but now, this is what the lord says – he who created you, jacob, he who formed you, israel: ‘do not fear, for i have redeemed you; i have summoned you by name; you are mine. 2 when you pass through the waters, i will be with you; and when you pass through the rivers, they will not sweep over you. when you walk through the fire, you will not be burned; the flames will not set you ablaze.">
+        <a href="#verse-17">Jes 43,1b-2</a>
+      </li>
+      
+      <li class="scripture-card" data-search="eph 3,15 from whom every family [1] in heaven and on earth derives its name.">
+        <a href="#verse-18">Eph 3,15</a>
+      </li>
+      
+      <li class="scripture-card" data-search="4.mose 6,24-27 ‘ “ ‘the lord bless you and keep you; the lord make his face shine on you and be gracious to you; the lord turn his face towards you and give you peace.’ ” ‘so they will put my name on the israelites, and i will bless them.’">
+        <a href="#verse-19">4.Mose 6,24-27</a>
+      </li>
+      
+      <li class="scripture-card" data-search="ps 103,13 as a father has compassion on his children, so the lord has compassion on those who fear him;">
+        <a href="#verse-20">Ps 103,13</a>
+      </li>
+      
+      <li class="scripture-card" data-search="mk 1,15 ‘the time has come,’ he said. ‘the kingdom of god has come near. repent and believe the good news!’">
+        <a href="#verse-21">Mk 1,15</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1.joh 1,9 if we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.">
+        <a href="#verse-22">1.Joh 1,9</a>
+      </li>
+      
+    </ul>
+  </main>
+
+  <footer class="page-footer">
+    <p>22 Stellen</p>
+  </footer>
+
+  <section class="verses-section">
+    
+    <article class="verse-card" id="verse-1">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Philip said, ‘Lord, show us the Father and that will be enough for us.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Joh 14,8</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-2">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">I have made you [5] known to them, and will continue to make you known in order that the love you have for me may be in them and that I myself may be in them.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Joh 17,26</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-3">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">But if it is by the Spirit of God that I drive out demons, then the kingdom of God has come upon you.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Mt 12,28</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-4">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">6 We are from God, and whoever knows God listens to us; but whoever is not from God does not listen to us. This is how we recognise the Spirit[1] of truth and the spirit of falsehood. 9 This is how God showed his love among us: he sent his one and only Son into the world that we might live through him.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">1.Joh 4,6.9</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-5">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">so that Christ may dwell in your hearts through faith. And I pray that you, being rooted and established in love, may have power, together with all the Lord’s holy people, to grasp how wide and long and high and deep is the love of Christ, and to know this love that surpasses knowledge – that you may be filled to the measure of all the fullness of God.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Eph 3,17-19</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-6">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">For in Christ all the fullness of the Deity lives in bodily form,</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Kol 2,9</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-7">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">And he is not served by human hands, as if he needed anything. Rather, he himself gives everyone life and breath and everything else.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Apg 17,25</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-8">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">The Lord is my shepherd, I lack nothing.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Ps 23,1</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-9">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Then say to Pharaoh, “This is what the Lord says: Israel is my firstborn son,</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">2.Mose 4,22</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-10">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Is this the way you repay the Lord, you foolish and unwise people? Is he not your Father, your Creator, [1] who made you and formed you?</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">5.Mose 32,6</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-11">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">But you are our Father, though Abraham does not know us or Israel acknowledge us; you, Lord, are our Father, our Redeemer from of old is your name.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Jes 63,16</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-12">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">‘I have revealed you [1] to those whom you gave me out of the world. They were yours; you gave them to me and they have obeyed your word.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Joh 17,6</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-13">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">So God created mankind in his own image, in the image of God he created them; male and female he created them.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">1.Mose 1,27</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-14">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">about sin, because people do not believe in me;</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Joh 16,9</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-15">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">‘When Israel was a child, I loved him, and out of Egypt I called my son. But the more they were called, the more they went away from me. [1] They sacrificed to the Baals and they burned incense to images. It was I who taught Ephraim to walk, taking them by the arms; but they did not realise it was I who healed them. I led them with cords of human kindness, with ties of love. To them I was like one who lifts a little child to the cheek, and I bent down to feed them.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Hos 11,1-4</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-16">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">And a voice came from heaven: ‘You are my Son, whom I love; with you I am well pleased.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Mk 1,11</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-17">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">1 But now, this is what the Lord says – he who created you, Jacob, he who formed you, Israel: ‘Do not fear, for I have redeemed you; I have summoned you by name; you are mine. 2 When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you. When you walk through the fire, you will not be burned; the flames will not set you ablaze.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Jes 43,1b-2</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-18">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">from whom every family [1] in heaven and on earth derives its name.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Eph 3,15</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-19">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">‘ “ ‘The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you; the Lord turn his face towards you and give you peace.’ ” ‘So they will put my name on the Israelites, and I will bless them.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">4.Mose 6,24-27</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-20">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">As a father has compassion on his children, so the Lord has compassion on those who fear him;</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Ps 103,13</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-21">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">‘The time has come,’ he said. ‘The kingdom of God has come near. Repent and believe the good news!’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">Mk 1,15</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-22">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <span class="verse-card__reference">1.Joh 1,9</span>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+  </section>
+
+  <script>
+    (function () {
+      const input = document.getElementById('scriptureSearch');
+      const cards = Array.from(document.querySelectorAll('#scriptureGrid .scripture-card'));
+      const count = document.getElementById('searchCount');
+
+      function filter() {
+        const q = input.value.trim().toLowerCase();
+        let visible = 0;
+        cards.forEach(function (card) {
+          const match = q === '' || card.dataset.search.includes(q);
+          card.hidden = !match;
+          if (match) visible++;
+        });
+        count.textContent = q === ''
+          ? ''
+          : (visible + (visible === 1 ? ' Treffer' : ' Treffer'));
+      }
+
+      input.addEventListener('input', filter);
+    })();
+  </script>
+
+</body>
+</html>
