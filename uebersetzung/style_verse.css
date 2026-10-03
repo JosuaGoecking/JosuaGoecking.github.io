@@ -163,9 +163,11 @@ body {
   font-size: .7rem;
   letter-spacing: .18em;
   text-transform: uppercase;
+  text-decoration: none;
   color: var(--gold);
   white-space: nowrap;
 }
+.verse-card__reference:hover { color: var(--gold-dim); }
 
 /* ── Entry animation ── */
 @keyframes revealCard {
