@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>22.11.2026 – Bibelstellen</title>
+  <link rel="stylesheet" href="../style_shared.css">
+  <link rel="stylesheet" href="../style_index.css">
+  <link rel="stylesheet" href="../style_verse.css">
+  <style>
+    /* ── Suchleiste ── */
+    .search-bar {
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+    .search-bar__input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      letter-spacing: .02em;
+      padding: .85rem 1rem .85rem 2.5rem;
+      outline: none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .search-bar__input::placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .search-bar__input:focus {
+      border-color: var(--gold-dim);
+      background: #161622;
+    }
+    .search-bar__icon {
+      position: absolute;
+      left: 1.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-dim);
+      font-size: .95rem;
+      pointer-events: none;
+    }
+    .search-bar__count {
+      text-align: center;
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: .85rem;
+      color: var(--text-muted);
+      margin-top: .6rem;
+    }
+
+    /* ── Verweise: verstecken statt neu laden ── */
+    .scripture-card[hidden] { display: none; }
+
+    /* ── Verse-Sektion (statt eigener Seite) ── */
+    .verses-section {
+      max-width: 640px;
+      margin: 2rem auto 0;
+      padding: 0 1.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      scroll-margin-top: 2rem;
+    }
+    .verses-section .verse-card {
+      scroll-margin-top: 2rem;
+      animation: none; /* nicht bei jedem Laden neu einblenden */
+    }
+    .verse-card__gotop {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.25rem;
+      font-family: var(--font-display);
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .verse-card__gotop:hover { color: var(--gold); }
+
+    /* Zielanker kurz hervorheben */
+    .verse-card:target {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back-link" href="#top">Übersicht</a>
+
+  <header class="page-header" id="top">
+    <h1 class="page-header__title">Bibelstellen</h1>
+    <p class="page-header__date">22.11.2026</p>
+  </header>
+
+  <div class="divider" aria-hidden="true">
+    <span class="divider__symbol">✦</span>
+  </div>
+
+  <div class="search-bar">
+    <span class="search-bar__icon" aria-hidden="true">✦</span>
+    <input
+      type="search"
+      id="scriptureSearch"
+      class="search-bar__input"
+      placeholder="Bibelstelle oder Vers suchen …"
+      autocomplete="off"
+    >
+    <p class="search-bar__count" id="searchCount"></p>
+  </div>
+
+  <main>
+    <ul class="scripture-grid" role="list" id="scriptureGrid">
+      
+      <li class="scripture-card" data-search="eph 3,17 so that christ may dwell in your hearts through faith. and i pray that you, being rooted and established in love,">
+        <a href="#verse-1">Eph 3,17</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 17,26 i have made you known to them, and will continue to make you known in order that the love you have for me may be in them and that i myself may be in them.’">
+        <a href="#verse-2">Joh 17,26</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1 joh 1,5 this is the message we have heard from him and declare to you: god is light; in him there is no darkness at all.">
+        <a href="#verse-3">1 Joh 1,5</a>
+      </li>
+      
+      <li class="scripture-card" data-search="jak 1,17 every good and perfect gift is from above, coming down from the father of the heavenly lights, who does not change like shifting shadows.">
+        <a href="#verse-4">Jak 1,17</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1 joh 4,8 whoever does not love does not know god, because god is love.">
+        <a href="#verse-5">1 Joh 4,8</a>
+      </li>
+      
+      <li class="scripture-card" data-search="röm 8,15-16 the spirit you received does not make you slaves, so that you live in fear again; rather, the spirit you received brought about your adoption to sonship. and by him we cry, ‘abba, father.’ the spirit himself testifies with our spirit that we are god’s children.">
+        <a href="#verse-6">Röm 8,15-16</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 17,23 i in them and you in me – so that they may be brought to complete unity. then the world will know that you sent me and have loved them even as you have loved me.">
+        <a href="#verse-7">Joh 17,23</a>
+      </li>
+      
+      <li class="scripture-card" data-search="1 joh 4,16 and so we know and rely on the love god has for us. god is love. whoever lives in love lives in god, and god in them.">
+        <a href="#verse-8">1 Joh 4,16</a>
+      </li>
+      
+      <li class="scripture-card" data-search="röm 5,5 and hope does not put us to shame, because god’s love has been poured out into our hearts through the holy spirit, who has been given to us.">
+        <a href="#verse-9">Röm 5,5</a>
+      </li>
+      
+      <li class="scripture-card" data-search="phil 4,19 and my god will meet all your needs according to the riches of his glory in christ jesus.">
+        <a href="#verse-10">Phil 4,19</a>
+      </li>
+      
+      <li class="scripture-card" data-search="2 mose 17,15 moses built an altar and called it the lord is my banner.">
+        <a href="#verse-11">2 Mose 17,15</a>
+      </li>
+      
+      <li class="scripture-card" data-search="spr 21,31 the horse is made ready for the day of battle, but victory rests with the lord.">
+        <a href="#verse-12">Spr 21,31</a>
+      </li>
+      
+      <li class="scripture-card" data-search="ps 18,1-20 i love you, lord, my strength. the lord is my rock, my fortress and my deliverer; my god is my rock, in whom i take refuge, my shield and the horn of my salvation, my stronghold. i called to the lord, who is worthy of praise, and i have been saved from my enemies. the cords of death entangled me; the torrents of destruction overwhelmed me. the cords of the grave coiled around me; the snares of death confronted me. in my distress i called to the lord; i cried to my god for help. from his temple he heard my voice; my cry came before him, into his ears. the earth trembled and quaked, and the foundations of the mountains shook; they trembled because he was angry. smoke rose from his nostrils; consuming fire came from his mouth, burning coals blazed out of it. he parted the heavens and came down; dark clouds were under his feet. he mounted the cherubim and flew; he soared on the wings of the wind. he made darkness his covering, his canopy around him – the dark rain clouds of the sky. out of the brightness of his presence clouds advanced, with hailstones and bolts of lightning. the lord thundered from heaven; the voice of the most high resounded. ( 2sam 22,14 ) ( 2sam 22,14 ) he shot his arrows and scattered the enemy, with great bolts of lightning he routed them. the valleys of the sea were exposed and the foundations of the earth laid bare at your rebuke, lord, at the blast of breath from your nostrils. he reached down from on high and took hold of me; he drew me out of deep waters. he rescued me from my powerful enemy, from my foes, who were too strong for me. they confronted me in the day of my disaster, but the lord was my support. he brought me out into a spacious place; he rescued me because he delighted in me. the lord has dealt with me according to my righteousness; according to the cleanness of my hands he has rewarded me.">
+        <a href="#verse-13">Ps 18,1-20</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 8,1-11 but jesus went to the mount of olives. at dawn he appeared again in the temple courts, where all the people gathered round him, and he sat down to teach them. the teachers of the law and the pharisees brought in a woman caught in adultery. they made her stand before the group and said to jesus, ‘teacher, this woman was caught in the act of adultery. in the law moses commanded us to stone such women. now what do you say?’ they were using this question as a trap, in order to have a basis for accusing him. but jesus bent down and started to write on the ground with his finger. when they kept on questioning him, he straightened up and said to them, ‘let any one of you who is without sin be the first to throw a stone at her.’ again he stooped down and wrote on the ground. at this, those who heard began to go away one at a time, the older ones first, until only jesus was left, with the woman still standing there. jesus straightened up and asked her, ‘woman, where are they? has no-one condemned you?’ ‘no-one, sir,’ she said. ‘then neither do i condemn you,’ jesus declared. ‘go now and leave your life of sin.’">
+        <a href="#verse-14">Joh 8,1-11</a>
+      </li>
+      
+      <li class="scripture-card" data-search="joh 9,1-5 as he went along, he saw a man blind from birth. his disciples asked him, ‘rabbi, who sinned, this man or his parents, that he was born blind?’ ‘neither this man nor his parents sinned,’ said jesus, ‘but this happened so that the works of god might be displayed in him. as long as it is day, we must do the works of him who sent me. night is coming, when no-one can work. while i am in the world, i am the light of the world.’">
+        <a href="#verse-15">Joh 9,1-5</a>
+      </li>
+      
+      <li class="scripture-card" data-search="lk 4,30 but he walked right through the crowd and went on his way.">
+        <a href="#verse-16">Lk 4,30</a>
+      </li>
+      
+      <li class="scripture-card" data-search="ps 45,8 all your robes are fragrant with myrrh and aloes and cassia; from palaces adorned with ivory the music of the strings makes you glad.">
+        <a href="#verse-17">Ps 45,8</a>
+      </li>
+      
+      <li class="scripture-card" data-search="hebr 1,9 you have loved righteousness and hated wickedness; therefore god, your god, has set you above your companions by anointing you with the oil of joy.’ ( ps 45,6 ; ps 45,7 ) ( ps 45,6 ; ps 45,7 )">
+        <a href="#verse-18">Hebr 1,9</a>
+      </li>
+      
+    </ul>
+  </main>
+
+  <footer class="page-footer">
+    <p>18 Stellen</p>
+  </footer>
+
+  <section class="verses-section">
+    
+    <article class="verse-card" id="verse-1">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">so that Christ may dwell in your hearts through faith. And I pray that you, being rooted and established in love,</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Eph3:17">Eph 3,17</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-2">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">I have made you known to them, and will continue to make you known in order that the love you have for me may be in them and that I myself may be in them.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Joh17:26">Joh 17,26</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-3">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">This is the message we have heard from him and declare to you: God is light; in him there is no darkness at all.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/1Joh1:5">1 Joh 1,5</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-4">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Every good and perfect gift is from above, coming down from the Father of the heavenly lights, who does not change like shifting shadows.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Jak1:17">Jak 1,17</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-5">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Whoever does not love does not know God, because God is love.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/1Joh4:8">1 Joh 4,8</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-6">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">The Spirit you received does not make you slaves, so that you live in fear again; rather, the Spirit you received brought about your adoption to sonship. And by him we cry, ‘Abba, Father.’ The Spirit himself testifies with our spirit that we are God’s children.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/R%C3%B6m8,15-16">Röm 8,15-16</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-7">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">I in them and you in me – so that they may be brought to complete unity. Then the world will know that you sent me and have loved them even as you have loved me.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Joh17:23">Joh 17,23</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-8">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">And so we know and rely on the love God has for us. God is love. Whoever lives in love lives in God, and God in them.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/1Joh4:16">1 Joh 4,16</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-9">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">And hope does not put us to shame, because God’s love has been poured out into our hearts through the Holy Spirit, who has been given to us.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/R%C3%B6m5:5">Röm 5,5</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-10">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">And my God will meet all your needs according to the riches of his glory in Christ Jesus.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Phil4:19">Phil 4,19</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-11">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">Moses built an altar and called it The Lord is my Banner.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/2Mose17:15">2 Mose 17,15</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-12">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">The horse is made ready for the day of battle, but victory rests with the Lord.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Spr21:31">Spr 21,31</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-13">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">I love you, Lord, my strength. The Lord is my rock, my fortress and my deliverer; my God is my rock, in whom I take refuge, my shield and the horn of my salvation, my stronghold. I called to the Lord, who is worthy of praise, and I have been saved from my enemies. The cords of death entangled me; the torrents of destruction overwhelmed me. The cords of the grave coiled around me; the snares of death confronted me. In my distress I called to the Lord; I cried to my God for help. From his temple he heard my voice; my cry came before him, into his ears. The earth trembled and quaked, and the foundations of the mountains shook; they trembled because he was angry. Smoke rose from his nostrils; consuming fire came from his mouth, burning coals blazed out of it. He parted the heavens and came down; dark clouds were under his feet. He mounted the cherubim and flew; he soared on the wings of the wind. He made darkness his covering, his canopy around him – the dark rain clouds of the sky. Out of the brightness of his presence clouds advanced, with hailstones and bolts of lightning. The Lord thundered from heaven; the voice of the Most High resounded. ( 2Sam 22,14 ) ( 2Sam 22,14 ) He shot his arrows and scattered the enemy, with great bolts of lightning he routed them. The valleys of the sea were exposed and the foundations of the earth laid bare at your rebuke, Lord, at the blast of breath from your nostrils. He reached down from on high and took hold of me; he drew me out of deep waters. He rescued me from my powerful enemy, from my foes, who were too strong for me. They confronted me in the day of my disaster, but the Lord was my support. He brought me out into a spacious place; he rescued me because he delighted in me. The Lord has dealt with me according to my righteousness; according to the cleanness of my hands he has rewarded me.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Ps18,1-20">Ps 18,1-20</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-14">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">but Jesus went to the Mount of Olives. At dawn he appeared again in the temple courts, where all the people gathered round him, and he sat down to teach them. The teachers of the law and the Pharisees brought in a woman caught in adultery. They made her stand before the group and said to Jesus, ‘Teacher, this woman was caught in the act of adultery. In the Law Moses commanded us to stone such women. Now what do you say?’ They were using this question as a trap, in order to have a basis for accusing him. But Jesus bent down and started to write on the ground with his finger. When they kept on questioning him, he straightened up and said to them, ‘Let any one of you who is without sin be the first to throw a stone at her.’ Again he stooped down and wrote on the ground. At this, those who heard began to go away one at a time, the older ones first, until only Jesus was left, with the woman still standing there. Jesus straightened up and asked her, ‘Woman, where are they? Has no-one condemned you?’ ‘No-one, sir,’ she said. ‘Then neither do I condemn you,’ Jesus declared. ‘Go now and leave your life of sin.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Joh8,1-11">Joh 8,1-11</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-15">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">As he went along, he saw a man blind from birth. His disciples asked him, ‘Rabbi, who sinned, this man or his parents, that he was born blind?’ ‘Neither this man nor his parents sinned,’ said Jesus, ‘but this happened so that the works of God might be displayed in him. As long as it is day, we must do the works of him who sent me. Night is coming, when no-one can work. While I am in the world, I am the light of the world.’</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Joh9,1-5">Joh 9,1-5</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-16">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">But he walked right through the crowd and went on his way.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Lk4:30">Lk 4,30</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-17">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">All your robes are fragrant with myrrh and aloes and cassia; from palaces adorned with ivory the music of the strings makes you glad.</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Ps45:8">Ps 45,8</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+    <article class="verse-card" id="verse-18">
+      <span class="verse-card__corners" aria-hidden="true"></span>
+
+      <div class="verse-card__rule" aria-hidden="true">
+        <span class="verse-card__rule-symbol">✦</span>
+      </div>
+
+      <span class="verse-card__quote-mark" aria-hidden="true">&ldquo;</span>
+
+      <p class="verse-card__text">You have loved righteousness and hated wickedness; therefore God, your God, has set you above your companions by anointing you with the oil of joy.’ ( Ps 45,6 ; Ps 45,7 ) ( Ps 45,6 ; Ps 45,7 )</p>
+
+      <footer class="verse-card__footer">
+        <span class="verse-card__footer-line"></span>
+        <a class="verse-card__reference" target="_blank" href="https://www.bibleserver.com/NIV/Hebr1:9">Hebr 1,9</a>
+      </footer>
+
+      <a class="verse-card__gotop" href="#top">↑ Zur Übersicht</a>
+    </article>
+    
+  </section>
+
+  <script>
+    (function () {
+      const input = document.getElementById('scriptureSearch');
+      const cards = Array.from(document.querySelectorAll('#scriptureGrid .scripture-card'));
+      const count = document.getElementById('searchCount');
+
+      function filter() {
+        const q = input.value.trim().toLowerCase();
+        let visible = 0;
+        cards.forEach(function (card) {
+          const match = q === '' || card.dataset.search.includes(q);
+          card.hidden = !match;
+          if (match) visible++;
+        });
+        count.textContent = q === ''
+          ? ''
+          : (visible + (visible === 1 ? ' Treffer' : ' Treffer'));
+      }
+
+      input.addEventListener('input', filter);
+    })();
+  </script>
+
+</body>
+</html>
